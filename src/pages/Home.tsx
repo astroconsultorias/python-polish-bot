@@ -2,29 +2,38 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Briefcase, Users, TrendingUp, Heart } from "lucide-react";
+import heroImage from "@/assets/hero-inclusao.jpg";
+import featureTalentos from "@/assets/feature-talentos.jpg";
+import featureEmpresas from "@/assets/feature-empresas.jpg";
+import featureCrescimento from "@/assets/feature-crescimento.jpg";
+import featureInclusao from "@/assets/feature-inclusao.jpg";
 
 const Home = () => {
   const features = [
     {
       icon: Users,
+      image: featureTalentos,
       title: "Para Talentos",
       description:
         "Crie seu perfil e conecte-se com empresas que valorizam a diversidade e inclusão.",
     },
     {
       icon: Briefcase,
+      image: featureEmpresas,
       title: "Para Empresas",
       description:
         "Encontre talentos qualificados e construa equipes mais diversas e inovadoras.",
     },
     {
       icon: TrendingUp,
+      image: featureCrescimento,
       title: "Crescimento",
       description:
         "Acesse oportunidades de desenvolvimento profissional e networking.",
     },
     {
       icon: Heart,
+      image: featureInclusao,
       title: "Inclusão Real",
       description:
         "Promovemos um ambiente onde todos têm oportunidades iguais de crescer.",
@@ -34,25 +43,34 @@ const Home = () => {
   return (
     <div className="space-y-16">
       {/* Hero Section */}
-      <section className="relative overflow-hidden rounded-2xl bg-gradient-hero px-8 py-16 text-white shadow-xl md:px-16 md:py-24">
-        <div className="relative z-10 max-w-3xl">
-          <h1 className="mb-6 text-4xl font-bold leading-tight md:text-5xl lg:text-6xl">
-            Conectando Talentos Inclusivos a Oportunidades
-          </h1>
-          <p className="mb-8 text-lg text-white/90 md:text-xl">
-            A plataforma que une pessoas neurodivergentes e com deficiência às
-            empresas mais inclusivas do Rio Grande do Sul.
-          </p>
-          <div className="flex flex-wrap gap-4">
-            <Button size="lg" variant="secondary" asChild>
-              <Link to="/auth?signup=true">Cadastre-se Gratuitamente</Link>
-            </Button>
-            <Button size="lg" variant="outline" className="border-white text-white hover:bg-white/10" asChild>
-              <Link to="/vagas">Ver Vagas</Link>
-            </Button>
+      <section className="relative overflow-hidden rounded-2xl shadow-xl">
+        <div className="absolute inset-0">
+          <img 
+            src={heroImage} 
+            alt="Equipe diversa e inclusiva" 
+            className="h-full w-full object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-primary/95 via-primary/80 to-primary/60" />
+        </div>
+        <div className="relative z-10 px-8 py-16 md:px-16 md:py-24">
+          <div className="max-w-3xl">
+            <h1 className="mb-6 text-4xl font-bold leading-tight text-white md:text-5xl lg:text-6xl">
+              Conectando Talentos Inclusivos a Oportunidades
+            </h1>
+            <p className="mb-8 text-lg text-white/95 md:text-xl">
+              A plataforma que une pessoas neurodivergentes e com deficiência às
+              empresas mais inclusivas do Rio Grande do Sul.
+            </p>
+            <div className="flex flex-wrap gap-4">
+              <Button size="lg" variant="secondary" asChild>
+                <Link to="/auth?signup=true">Cadastre-se Gratuitamente</Link>
+              </Button>
+              <Button size="lg" variant="outline" className="border-white bg-white/10 text-white hover:bg-white/20" asChild>
+                <Link to="/vagas">Ver Vagas</Link>
+              </Button>
+            </div>
           </div>
         </div>
-        <div className="absolute inset-0 bg-gradient-to-r from-black/20 to-transparent" />
       </section>
 
       {/* Features */}
@@ -70,11 +88,19 @@ const Home = () => {
           {features.map((feature, index) => {
             const Icon = feature.icon;
             return (
-              <Card key={index} className="border-2 transition-all hover:shadow-lg hover:border-primary/50">
-                <CardHeader>
-                  <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10">
-                    <Icon className="h-6 w-6 text-primary" />
+              <Card key={index} className="group overflow-hidden border-2 transition-all hover:shadow-lg hover:border-primary/50">
+                <div className="relative h-48 overflow-hidden">
+                  <img 
+                    src={feature.image} 
+                    alt={feature.title}
+                    className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-110"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-background/90 to-transparent" />
+                  <div className="absolute bottom-4 left-4 flex h-12 w-12 items-center justify-center rounded-lg bg-primary shadow-lg">
+                    <Icon className="h-6 w-6 text-primary-foreground" />
                   </div>
+                </div>
+                <CardHeader>
                   <CardTitle>{feature.title}</CardTitle>
                 </CardHeader>
                 <CardContent>

@@ -1,18 +1,29 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Target, Eye, Award } from "lucide-react";
+import missionImage from "@/assets/about-mission.jpg";
 
 const About = () => {
   return (
     <div className="space-y-12">
-      <div className="text-center space-y-4">
-        <h1 className="text-4xl font-bold text-foreground">
-          Sobre o Inclu@Tech
-        </h1>
-        <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-          Conectando talentos neurodivergentes e pessoas com deficiência a
-          empresas inclusivas no Rio Grande do Sul
-        </p>
-      </div>
+      <section className="relative overflow-hidden rounded-2xl shadow-xl">
+        <div className="absolute inset-0">
+          <img 
+            src={missionImage} 
+            alt="Missão e Visão Inclu@Tech" 
+            className="h-full w-full object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-accent/95 to-accent/70" />
+        </div>
+        <div className="relative z-10 px-8 py-16 text-center md:px-16 md:py-20">
+          <h1 className="mb-4 text-4xl font-bold text-white md:text-5xl">
+            Sobre o Inclu@Tech
+          </h1>
+          <p className="mx-auto max-w-2xl text-lg text-white/95 md:text-xl">
+            Conectando talentos neurodivergentes e pessoas com deficiência a
+            empresas inclusivas no Rio Grande do Sul
+          </p>
+        </div>
+      </section>
 
       <Card>
         <CardContent className="pt-6 space-y-4">

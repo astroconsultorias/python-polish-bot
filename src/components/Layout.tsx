@@ -2,6 +2,7 @@ import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/hooks/useAuth";
 import { Home, Briefcase, Users, BookOpen, LogOut, User } from "lucide-react";
+import logo from "@/assets/logo.png";
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
   const location = useLocation();
@@ -22,12 +23,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
       <header className="sticky top-0 z-50 w-full border-b bg-card/95 backdrop-blur supports-[backdrop-filter]:bg-card/60">
         <nav className="container mx-auto flex h-16 items-center justify-between px-4">
           <Link to="/" className="flex items-center space-x-2">
-            <div className="flex items-center justify-center w-10 h-10 rounded-lg bg-gradient-hero">
-              <span className="text-white font-bold text-xl">I@T</span>
-            </div>
-            <span className="hidden font-bold sm:inline-block text-foreground">
-              Inclu@Tech
-            </span>
+            <img src={logo} alt="Inclu@Tech" className="h-12 w-auto" />
           </Link>
 
           <div className="flex items-center gap-6">
