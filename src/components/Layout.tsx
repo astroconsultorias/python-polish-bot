@@ -1,12 +1,12 @@
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/hooks/useAuth";
-import { Home, Briefcase, Users, BookOpen, LogOut, User } from "lucide-react";
+import { Home, Briefcase, Users, BookOpen, LogOut, User, Shield } from "lucide-react";
 import logo from "@/assets/logo.png";
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
   const location = useLocation();
-  const { user, signOut } = useAuth();
+  const { user, signOut, isAdmin } = useAuth();
 
   const navigation = [
     { name: "Início", href: "/", icon: Home },
@@ -44,6 +44,19 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
                 </Link>
               );
             })}
+            {isAdmin && (
+              <Link
+                to="/admin"
+                className={`flex items-center gap-2 text-sm font-medium transition-colors hover:text-primary ${
+                  isActive("/admin")
+                    ? "text-primary"
+                    : "text-muted-foreground"
+                }`}
+              >
+                <Shield className="h-4 w-4" />
+                <span className="hidden md:inline">Admin</span>
+              </Link>
+            )}
           </div>
 
           <div className="flex items-center gap-2">

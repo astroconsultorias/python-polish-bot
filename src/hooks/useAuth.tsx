@@ -9,6 +9,7 @@ interface AuthContextType {
   session: Session | null;
   signOut: () => Promise<void>;
   isLoading: boolean;
+  isAdmin: boolean;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -17,9 +18,21 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
   const [session, setSession] = useState<Session | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [isAdmin, setIsAdmin] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
+    const checkAdminStatus = async (userId: string) => {
+      const { data } = await supabase
+        .from('user_roles')
+        .select('role')
+        .eq('user_id', userId)
+        .eq('role', 'admin')
+        .maybeSingle();
+      
+      setIsAdmin(!!data);
+    };
+
     // Set up auth state listener first
     const {
       data: { subscription },
@@ -27,6 +40,12 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       setSession(session);
       setUser(session?.user ?? null);
       setIsLoading(false);
+      
+      if (session?.user) {
+        setTimeout(() => checkAdminStatus(session.user.id), 0);
+      } else {
+        setIsAdmin(false);
+      }
     });
 
     // Then check for existing session
@@ -34,6 +53,10 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       setSession(session);
       setUser(session?.user ?? null);
       setIsLoading(false);
+      
+      if (session?.user) {
+        checkAdminStatus(session.user.id);
+      }
     });
 
     return () => subscription.unsubscribe();
@@ -53,7 +76,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ user, session, signOut, isLoading }}>
+    <AuthContext.Provider value={{ user, session, signOut, isLoading, isAdmin }}>
       {children}
     </AuthContext.Provider>
   );
