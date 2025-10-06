@@ -1,12 +1,14 @@
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/hooks/useAuth";
+import { useAdmin } from "@/hooks/useAdmin";
 import { Home, Briefcase, Users, BookOpen, LogOut, User, Shield } from "lucide-react";
 import logo from "@/assets/logo.png";
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
   const location = useLocation();
-  const { user, signOut, isAdmin } = useAuth();
+  const { user, signOut } = useAuth();
+  const { isAdmin } = useAdmin();
 
   const navigation = [
     { name: "Início", href: "/", icon: Home },
