@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { useAuth } from "@/hooks/useAuth";
 import { useAdmin } from "@/hooks/useAdmin";
 import { Home, Briefcase, Users, BookOpen, LogOut, User, Shield } from "lucide-react";
-import logo from "@/assets/logo-professional.png";
+import logo from "@/assets/logo.png";
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
   const location = useLocation();
