@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { useAuth } from "@/hooks/useAuth";
 import { useAdmin } from "@/hooks/useAdmin";
 import { Home, Briefcase, Users, BookOpen, LogOut, User, Shield } from "lucide-react";
-import logo from "@/assets/logo.png";
+import logo from "@/assets/logo-professional.png";
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
   const location = useLocation();
@@ -22,54 +22,55 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
-      <header className="sticky top-0 z-50 w-full border-b bg-card/95 backdrop-blur supports-[backdrop-filter]:bg-card/60">
-        <nav className="container mx-auto flex h-16 items-center justify-between px-4">
-          <Link to="/" className="flex items-center space-x-2">
-            <img src={logo} alt="Inclu@Tech" className="h-12 w-auto" />
+      <header className="sticky top-0 z-50 w-full border-b bg-card/95 backdrop-blur supports-[backdrop-filter]:bg-card/80 shadow-sm">
+        <nav className="container mx-auto flex h-20 items-center justify-between px-6">
+          <Link to="/" className="flex items-center space-x-3 group">
+            <img src={logo} alt="Inclu@Tech" className="h-14 w-auto transition-transform group-hover:scale-105" />
+            <span className="text-xl font-bold text-foreground hidden sm:inline">Inclu@Tech</span>
           </Link>
 
-          <div className="flex items-center gap-6">
+          <div className="flex items-center gap-1">
             {navigation.map((item) => {
               const Icon = item.icon;
               return (
                 <Link
                   key={item.name}
                   to={item.href}
-                  className={`flex items-center gap-2 text-sm font-medium transition-colors hover:text-primary ${
+                  className={`flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-md transition-all ${
                     isActive(item.href)
-                      ? "text-primary"
-                      : "text-muted-foreground"
+                      ? "text-primary bg-primary-light"
+                      : "text-muted-foreground hover:text-foreground hover:bg-muted"
                   }`}
                 >
                   <Icon className="h-4 w-4" />
-                  <span className="hidden md:inline">{item.name}</span>
+                  <span className="hidden lg:inline">{item.name}</span>
                 </Link>
               );
             })}
             {isAdmin && (
               <Link
                 to="/admin"
-                className={`flex items-center gap-2 text-sm font-medium transition-colors hover:text-primary ${
+                className={`flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-md transition-all ${
                   isActive("/admin")
-                    ? "text-primary"
-                    : "text-muted-foreground"
+                    ? "text-primary bg-primary-light"
+                    : "text-muted-foreground hover:text-foreground hover:bg-muted"
                 }`}
               >
                 <Shield className="h-4 w-4" />
-                <span className="hidden md:inline">Admin</span>
+                <span className="hidden lg:inline">Admin</span>
               </Link>
             )}
           </div>
 
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-3">
             {user ? (
               <>
-                <Button variant="ghost" size="icon" asChild>
+                <Button variant="ghost" size="icon" asChild className="rounded-full">
                   <Link to="/perfil">
                     <User className="h-5 w-5" />
                   </Link>
                 </Button>
-                <Button variant="ghost" size="icon" onClick={signOut}>
+                <Button variant="ghost" size="icon" onClick={signOut} className="rounded-full">
                   <LogOut className="h-5 w-5" />
                 </Button>
               </>
@@ -88,30 +89,34 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
       </header>
 
       {/* Main content */}
-      <main className="container mx-auto px-4 py-8">{children}</main>
+      <main className="container mx-auto px-6 py-12">{children}</main>
 
       {/* Footer */}
-      <footer className="mt-auto border-t bg-card">
-        <div className="container mx-auto px-4 py-8">
-          <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
+      <footer className="mt-auto border-t bg-gradient-subtle">
+        <div className="container mx-auto px-6 py-12">
+          <div className="grid grid-cols-1 gap-12 md:grid-cols-3">
             <div>
-              <h3 className="mb-4 text-lg font-semibold text-foreground">
-                Inclu@Tech
-              </h3>
-              <p className="text-sm text-muted-foreground">
+              <div className="flex items-center space-x-3 mb-4">
+                <img src={logo} alt="Inclu@Tech" className="h-10 w-auto" />
+                <h3 className="text-lg font-bold text-foreground">
+                  Inclu@Tech
+                </h3>
+              </div>
+              <p className="text-sm text-muted-foreground leading-relaxed">
                 Conectando talentos neurodivergentes e pessoas com deficiência a empresas
                 inclusivas no Rio Grande do Sul.
               </p>
             </div>
             <div>
-              <h4 className="mb-4 text-sm font-semibold text-foreground">Links</h4>
-              <ul className="space-y-2 text-sm">
+              <h4 className="mb-4 text-sm font-semibold text-foreground uppercase tracking-wide">Links Rápidos</h4>
+              <ul className="space-y-3 text-sm">
                 {navigation.map((item) => (
                   <li key={item.name}>
                     <Link
                       to={item.href}
-                      className="text-muted-foreground hover:text-primary transition-colors"
+                      className="text-muted-foreground hover:text-primary transition-colors inline-flex items-center gap-2"
                     >
+                      <span className="w-1 h-1 rounded-full bg-primary"></span>
                       {item.name}
                     </Link>
                   </li>
@@ -119,14 +124,17 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
               </ul>
             </div>
             <div>
-              <h4 className="mb-4 text-sm font-semibold text-foreground">Contato</h4>
-              <p className="text-sm text-muted-foreground">
+              <h4 className="mb-4 text-sm font-semibold text-foreground uppercase tracking-wide">Contato</h4>
+              <p className="text-sm text-muted-foreground mb-2">
                 contato@incluatech.com.br
+              </p>
+              <p className="text-sm text-muted-foreground">
+                Rio Grande do Sul, Brasil
               </p>
             </div>
           </div>
-          <div className="mt-8 border-t pt-8 text-center text-sm text-muted-foreground">
-            © 2025 Inclu@Tech. Todos os direitos reservados.
+          <div className="mt-12 pt-8 border-t text-center text-sm text-muted-foreground">
+            <p>© 2025 Inclu@Tech. Todos os direitos reservados.</p>
           </div>
         </div>
       </footer>
