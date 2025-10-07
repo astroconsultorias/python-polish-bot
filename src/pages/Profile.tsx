@@ -8,6 +8,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Loader2 } from "lucide-react";
 import { TalentProfileForm } from "@/components/profile/TalentProfileForm";
 import { CompanyProfileForm } from "@/components/profile/CompanyProfileForm";
+import { ApplicationsList } from "@/components/profile/ApplicationsList";
 
 const Profile = () => {
   const { user, isLoading: authLoading } = useAuth();
@@ -85,6 +86,9 @@ const Profile = () => {
           <TabsTrigger value="professional">
             {profile.user_type === "talent" ? "Perfil Profissional" : "Perfil da Empresa"}
           </TabsTrigger>
+          {profile.user_type === "talent" && (
+            <TabsTrigger value="applications">Minhas Candidaturas</TabsTrigger>
+          )}
         </TabsList>
 
         <TabsContent value="info" className="space-y-4">
@@ -129,6 +133,12 @@ const Profile = () => {
             <CompanyProfileForm userId={user!.id} />
           )}
         </TabsContent>
+
+        {profile.user_type === "talent" && (
+          <TabsContent value="applications">
+            <ApplicationsList userId={user!.id} />
+          </TabsContent>
+        )}
       </Tabs>
     </div>
   );

@@ -1,10 +1,13 @@
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
+import { useAuth } from "@/hooks/useAuth";
+import { useNavigate } from "react-router-dom";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Briefcase, MapPin, Building2 } from "lucide-react";
 import { toast } from "sonner";
+import { ApplicationDialog } from "@/components/jobs/ApplicationDialog";
 
 interface Job {
   id: string;
@@ -21,8 +24,12 @@ interface Job {
 }
 
 const Jobs = () => {
+  const { user } = useAuth();
+  const navigate = useNavigate();
   const [jobs, setJobs] = useState<Job[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [selectedJob, setSelectedJob] = useState<Job | null>(null);
+  const [applicationDialogOpen, setApplicationDialogOpen] = useState(false);
 
   useEffect(() => {
     fetchJobs();
@@ -136,7 +143,20 @@ const Jobs = () => {
                 )}
 
                 <div className="flex gap-2 pt-2">
-                  <Button className="w-full sm:w-auto">Candidatar-se</Button>
+                  <Button 
+                    className="w-full sm:w-auto"
+                    onClick={() => {
+                      if (!user) {
+                        toast.error("Faça login para se candidatar");
+                        navigate("/auth");
+                        return;
+                      }
+                      setSelectedJob(job);
+                      setApplicationDialogOpen(true);
+                    }}
+                  >
+                    Candidatar-se
+                  </Button>
                   <Button variant="outline" className="w-full sm:w-auto">
                     Ver Detalhes
                   </Button>
@@ -145,6 +165,17 @@ const Jobs = () => {
             </Card>
           ))}
         </div>
+      )}
+
+      {selectedJob && (
+        <ApplicationDialog
+          jobId={selectedJob.id}
+          jobTitle={selectedJob.title}
+          companyName={selectedJob.companies.company_name}
+          open={applicationDialogOpen}
+          onOpenChange={setApplicationDialogOpen}
+          onSuccess={() => fetchJobs()}
+        />
       )}
     </div>
   );

@@ -8,6 +8,7 @@ import { BlogManager } from "@/components/admin/BlogManager";
 import { UsersManager } from "@/components/admin/UsersManager";
 import { JobsManager } from "@/components/admin/JobsManager";
 import { RolesManager } from "@/components/admin/RolesManager";
+import { ApplicationsManager } from "@/components/admin/ApplicationsManager";
 
 const Admin = () => {
   const navigate = useNavigate();
@@ -41,7 +42,7 @@ const Admin = () => {
       </div>
 
       <Tabs defaultValue="blog" className="space-y-6">
-        <TabsList className="grid w-full grid-cols-4 lg:w-auto">
+        <TabsList className="grid w-full grid-cols-5 lg:w-auto">
           <TabsTrigger value="blog" className="gap-2">
             <FileText className="h-4 w-4" />
             <span className="hidden sm:inline">Blog</span>
@@ -53,6 +54,10 @@ const Admin = () => {
           <TabsTrigger value="jobs" className="gap-2">
             <Briefcase className="h-4 w-4" />
             <span className="hidden sm:inline">Vagas</span>
+          </TabsTrigger>
+          <TabsTrigger value="applications" className="gap-2">
+            <Briefcase className="h-4 w-4" />
+            <span className="hidden sm:inline">Candidaturas</span>
           </TabsTrigger>
           <TabsTrigger value="roles" className="gap-2">
             <UserCog className="h-4 w-4" />
@@ -100,6 +105,10 @@ const Admin = () => {
               <JobsManager />
             </CardContent>
           </Card>
+        </TabsContent>
+
+        <TabsContent value="applications">
+          <ApplicationsManager />
         </TabsContent>
 
         <TabsContent value="roles">
