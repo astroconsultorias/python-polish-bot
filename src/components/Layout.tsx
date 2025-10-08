@@ -121,6 +121,24 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
                     </Link>
                   </li>
                 ))}
+                <li>
+                  <Link
+                    to="/termos"
+                    className="text-muted-foreground hover:text-primary transition-colors inline-flex items-center gap-2"
+                  >
+                    <span className="w-1 h-1 rounded-full bg-primary"></span>
+                    Termos de Uso
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="/privacidade"
+                    className="text-muted-foreground hover:text-primary transition-colors inline-flex items-center gap-2"
+                  >
+                    <span className="w-1 h-1 rounded-full bg-primary"></span>
+                    Privacidade
+                  </Link>
+                </li>
               </ul>
             </div>
             <div>
