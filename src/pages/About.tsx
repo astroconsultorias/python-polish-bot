@@ -1,131 +1,135 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Target, Eye, Award } from "lucide-react";
-import missionImage from "@/assets/about-mission.jpg";
+import KnotMark from "@/components/KnotMark";
+import { Card, CardContent } from "@/components/ui/card";
+import {
+  Eye,
+  HeartHandshake,
+  ShieldCheck,
+  Target,
+  Users,
+} from "lucide-react";
 
-const About = () => {
-  return (
-    <div className="space-y-12">
-      <section className="relative overflow-hidden rounded-2xl shadow-xl">
-        <div className="absolute inset-0">
-          <img 
-            src={missionImage} 
-            alt="Missão e Visão Inclu@Tech" 
-            className="h-full w-full object-cover"
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-accent/95 to-accent/70" />
-        </div>
-        <div className="relative z-10 px-8 py-16 text-center md:px-16 md:py-20">
-          <h1 className="mb-4 text-4xl font-bold text-white md:text-5xl">
-            Sobre o Inclu@Tech
+const principles = [
+  {
+    icon: Target,
+    title: "Missão inicial",
+    description:
+      "Co-desenvolver e validar práticas simples de atendimento neuroinclusivo em saúde, começando por um fluxo pequeno, ético e mensurável.",
+  },
+  {
+    icon: Eye,
+    title: "Visão",
+    description:
+      "Transformar neuroinclusão em práticas concretas, avaliáveis e replicáveis em ambientes de saúde e, futuramente, de trabalho.",
+  },
+  {
+    icon: ShieldCheck,
+    title: "Responsabilidade",
+    description:
+      "Construir com governança institucional, participação técnica e social, proteção de dados e limites claros de atuação.",
+  },
+];
+
+const About = () => (
+  <div className="space-y-16 pb-10">
+    <section className="relative overflow-hidden rounded-[2rem] bg-gradient-hero px-7 py-16 text-white shadow-2xl md:px-14 md:py-20">
+      <div className="dot-grid absolute inset-0 opacity-15" aria-hidden="true" />
+      <div className="relative z-10 grid gap-10 lg:grid-cols-[1.2fr_0.8fr] lg:items-center">
+        <div>
+          <span className="inline-flex rounded-full bg-white/15 px-4 py-2 text-xs font-extrabold uppercase tracking-[0.16em] backdrop-blur-sm">
+            Sobre o projeto
+          </span>
+          <h1 className="mt-6 text-4xl font-extrabold leading-tight md:text-6xl">
+            Neuroinclusão precisa sair do discurso e entrar na experiência.
           </h1>
-          <p className="mx-auto max-w-2xl text-lg text-white/95 md:text-xl">
-            Conectando talentos neurodivergentes e pessoas com deficiência a
-            empresas inclusivas no Rio Grande do Sul
+          <p className="mt-6 max-w-3xl text-lg leading-8 text-white/85 md:text-xl">
+            A Inclu@tech é um projeto de tecnologia social voltado à redução de
+            barreiras sensoriais, comunicacionais, informacionais, processuais e
+            culturais enfrentadas por pessoas neurodivergentes.
           </p>
         </div>
-      </section>
-
-      <Card>
-        <CardContent className="pt-6 space-y-4">
-          <p className="text-lg text-muted-foreground">
-            O <strong className="text-foreground">Inclu@Tech</strong> é uma
-            plataforma dedicada a promover a inclusão profissional de pessoas
-            neurodivergentes e com deficiência no mercado de trabalho gaúcho.
-          </p>
-          <p className="text-lg text-muted-foreground">
-            Acreditamos que a diversidade não é apenas um valor ético, mas também
-            um diferencial competitivo para as empresas. Através da nossa
-            plataforma, facilitamos a conexão entre talentos qualificados e
-            empresas comprometidas com práticas verdadeiramente inclusivas.
-          </p>
-        </CardContent>
-      </Card>
-
-      <div className="grid gap-8 md:grid-cols-3">
-        <Card className="border-2 border-primary/20">
-          <CardHeader>
-            <div className="flex items-center gap-3">
-              <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10">
-                <Target className="h-6 w-6 text-primary" />
-              </div>
-              <CardTitle>Missão</CardTitle>
-            </div>
-          </CardHeader>
-          <CardContent>
-            <p className="text-muted-foreground">
-              Promover a inclusão profissional através da conexão entre talentos
-              diversos e empresas comprometidas com a acessibilidade e inclusão
-              real.
-            </p>
-          </CardContent>
-        </Card>
-
-        <Card className="border-2 border-accent/20">
-          <CardHeader>
-            <div className="flex items-center gap-3">
-              <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-accent/10">
-                <Eye className="h-6 w-6 text-accent" />
-              </div>
-              <CardTitle>Visão</CardTitle>
-            </div>
-          </CardHeader>
-          <CardContent>
-            <p className="text-muted-foreground">
-              Ser a principal referência em inclusão profissional no Rio Grande
-              do Sul, transformando o mercado de trabalho em um espaço mais
-              diverso e acessível.
-            </p>
-          </CardContent>
-        </Card>
-
-        <Card className="border-2 border-success/20">
-          <CardHeader>
-            <div className="flex items-center gap-3">
-              <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-success/10">
-                <Award className="h-6 w-6 text-success" />
-              </div>
-              <CardTitle>Valores</CardTitle>
-            </div>
-          </CardHeader>
-          <CardContent>
-            <ul className="list-disc list-inside space-y-2 text-muted-foreground">
-              <li>Inclusão genuína</li>
-              <li>Respeito à diversidade</li>
-              <li>Acessibilidade universal</li>
-              <li>Igualdade de oportunidades</li>
-            </ul>
-          </CardContent>
-        </Card>
+        <div className="mx-auto flex aspect-square w-full max-w-[300px] items-center justify-center rounded-[18%] border border-white/20 bg-white/10 p-9 backdrop-blur-sm">
+          <KnotMark className="h-full w-full text-white" />
+        </div>
       </div>
+    </section>
 
-      <Card className="bg-gradient-card">
-        <CardHeader>
-          <CardTitle className="text-2xl">Nosso Compromisso</CardTitle>
-        </CardHeader>
-        <CardContent className="space-y-4">
-          <p className="text-muted-foreground">
-            No Inclu@Tech, estamos comprometidos em:
-          </p>
-          <ul className="space-y-3">
-            {[
-              "Garantir que todas as vagas publicadas sejam verdadeiramente inclusivas",
-              "Oferecer suporte personalizado tanto para talentos quanto para empresas",
-              "Promover educação sobre neurodiversidade e acessibilidade",
-              "Criar uma comunidade de apoio mútuo e networking",
-              "Monitorar e celebrar histórias de sucesso em inclusão",
-            ].map((item, index) => (
-              <li key={index} className="flex items-start gap-3">
-                <div className="mt-1 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-success/10">
-                  <div className="h-2 w-2 rounded-full bg-success" />
+    <section className="grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:items-start">
+      <div>
+        <span className="section-kicker">Origem</span>
+        <h2 className="mt-5 text-4xl font-extrabold leading-tight">
+          Uma vivência real, tratada com responsabilidade técnica.
+        </h2>
+      </div>
+      <div className="space-y-5 text-lg leading-8 text-muted-foreground">
+        <p>
+          O projeto nasceu da experiência de Jean Cesar Villela Rodrigues como pai
+          do Joaquim, uma criança autista com alta necessidade de suporte, e de sua
+          atuação por mais de 13 anos em ambiente hospitalar.
+        </p>
+        <p>
+          Essa trajetória permitiu observar como espera, estímulos, mudanças de
+          rotina e comunicação pouco previsível podem ampliar sofrimento. A vivência
+          pessoal, porém, não substitui evidência científica, governança institucional
+          nem a participação de pessoas neurodivergentes.
+        </p>
+        <p>
+          Por isso, a Inclu@tech não se apresenta como solução pronta. O caminho é
+          construir instrumentos com profissionais, instituições, usuários e famílias,
+          testar em pequena escala e aprender antes de expandir.
+        </p>
+      </div>
+    </section>
+
+    <section>
+      <div className="mb-10 text-center">
+        <span className="section-kicker">Direção estratégica</span>
+        <h2 className="mt-5 text-4xl font-extrabold">O que orienta a construção</h2>
+      </div>
+      <div className="grid gap-7 md:grid-cols-3">
+        {principles.map((principle) => {
+          const Icon = principle.icon;
+          return (
+            <Card key={principle.title} className="rounded-3xl border-2 border-transparent bg-gradient-card shadow-lg transition hover:border-primary/20 hover:shadow-xl">
+              <CardContent className="p-8">
+                <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-primary-light text-primary">
+                  <Icon className="h-7 w-7" aria-hidden="true" />
                 </div>
-                <span className="text-muted-foreground">{item}</span>
-              </li>
-            ))}
-          </ul>
-        </CardContent>
-      </Card>
-    </div>
-  );
-};
+                <h3 className="mb-4 text-2xl font-extrabold">{principle.title}</h3>
+                <p className="leading-7 text-muted-foreground">{principle.description}</p>
+              </CardContent>
+            </Card>
+          );
+        })}
+      </div>
+    </section>
+
+    <section className="rounded-[2rem] bg-slate-950 p-8 text-white shadow-2xl md:p-12">
+      <div className="grid gap-10 lg:grid-cols-2">
+        <div>
+          <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-hero">
+            <Users className="h-7 w-7" aria-hidden="true" />
+          </div>
+          <h2 className="mt-6 text-3xl font-extrabold">Escopo atual</h2>
+          <p className="mt-4 leading-7 text-white/70">
+            O primeiro ciclo está concentrado em atendimento em saúde: mapear um
+            fluxo real, identificar barreiras e avaliar um conjunto limitado de
+            melhorias de baixo custo.
+          </p>
+        </div>
+        <div>
+          <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-white/10 text-pink-300">
+            <HeartHandshake className="h-7 w-7" aria-hidden="true" />
+          </div>
+          <h2 className="mt-6 text-3xl font-extrabold">Visão futura</h2>
+          <p className="mt-4 leading-7 text-white/70">
+            Depois de gerar evidência, o método poderá inspirar soluções para
+            ambientes de trabalho, apoio a famílias e ferramentas digitais. Essas
+            frentes não fazem parte do micro-piloto inicial.
+          </p>
+        </div>
+      </div>
+    </section>
+  </div>
+);
 
 export default About;
