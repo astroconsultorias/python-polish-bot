@@ -71,7 +71,7 @@ const audiences = [
 
 const Home = () => (
   <div className="overflow-hidden">
-    <section className="relative isolate min-h-[calc(100vh-5rem)] bg-white">
+    <section className="relative isolate min-h-[calc(100vh-5rem)] bg-background">
       <div className="absolute inset-0 -z-10 bg-hero-glow" aria-hidden="true" />
       <div
         className="dot-grid absolute right-0 top-24 -z-10 h-64 w-64 opacity-40"
@@ -124,9 +124,9 @@ const Home = () => (
         <div className="relative mx-auto flex w-full max-w-[620px] items-center justify-center py-10 lg:py-0">
           <div className="hero-profile relative flex aspect-square w-[82%] max-w-[500px] items-center justify-center rounded-[12%] bg-gradient-hero shadow-2xl">
             <div className="absolute inset-[9%] rounded-[10%] border border-white/20" />
-            <KnotMark className="relative z-10 h-[58%] w-[76%] text-white drop-shadow-2xl" />
+            <KnotMark className="relative z-10 h-[56%] w-[56%] text-white drop-shadow-2xl" />
             <div className="absolute bottom-8 left-8 right-8 rounded-2xl border border-white/20 bg-white/10 px-5 py-4 text-center text-sm font-semibold text-white backdrop-blur-md">
-              Uma linha entra em nó e sai em caminho.
+              A pessoa no centro. O ambiente preparado para acolher.
             </div>
           </div>
           <div className="dot-stack absolute -right-2 top-10 h-32 w-12 text-primary" aria-hidden="true" />
@@ -179,7 +179,7 @@ const Home = () => (
       </div>
     </section>
 
-    <section id="metodo" className="scroll-mt-24 bg-slate-950 py-20 text-white md:py-28">
+    <section id="metodo" className="scroll-mt-24 bg-[#28213D] py-20 text-white md:py-28">
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
         <div className="grid gap-14 lg:grid-cols-[0.8fr_1.2fr] lg:items-center">
           <div>
@@ -194,15 +194,15 @@ const Home = () => (
             </p>
             <div className="mt-8 space-y-4 text-sm text-white/80">
               <p className="flex gap-3">
-                <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-pink-400" aria-hidden="true" />
+                <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-accent" aria-hidden="true" />
                 Um único fluxo de atendimento, definido em conjunto.
               </p>
               <p className="flex gap-3">
-                <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-pink-400" aria-hidden="true" />
+                <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-accent" aria-hidden="true" />
                 Medidas de baixo custo, com critérios claros de segurança e avaliação.
               </p>
               <p className="flex gap-3">
-                <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-pink-400" aria-hidden="true" />
+                <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-accent" aria-hidden="true" />
                 Nenhuma coleta de dado sensível sem governança e autorização adequadas.
               </p>
             </div>
@@ -261,7 +261,7 @@ const Home = () => (
 
     <section id="sobre" className="scroll-mt-24 bg-muted/55 py-20 md:py-28">
       <div className="mx-auto grid max-w-6xl gap-12 px-6 lg:grid-cols-[0.7fr_1.3fr] lg:items-center lg:px-10">
-        <div className="mx-auto flex aspect-square w-full max-w-[330px] items-center justify-center rounded-[18%] bg-gradient-hero p-10 shadow-2xl">
+        <div className="mx-auto flex aspect-square w-full max-w-[330px] items-center justify-center rounded-[18%] bg-gradient-hero p-12 shadow-2xl">
           <KnotMark className="h-full w-full text-white" />
         </div>
 
