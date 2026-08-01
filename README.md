@@ -139,6 +139,8 @@ Teste no ambiente conectado ao Supabase:
 9. testar administração com uma conta autorizada;
 10. verificar responsividade, teclado, foco, mensagens de erro e contraste.
 
+O deploy preview do pull request valida o build de produção do frontend. Ele não substitui testes ponta a ponta com contas reais nem confirma que as migrações foram executadas no banco remoto.
+
 ## Deploy
 
 O Netlify gera uma prévia para cada pull request. O deploy de produção deve acontecer somente após:
