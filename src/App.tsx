@@ -8,6 +8,8 @@ import Auth from "@/pages/Auth";
 import Jobs from "@/pages/Jobs";
 import About from "@/pages/About";
 import Blog from "@/pages/Blog";
+import BlogPost from "@/pages/BlogPost";
+import Participate from "@/pages/Participate";
 import Profile from "@/pages/Profile";
 import Admin from "@/pages/Admin";
 import Terms from "@/pages/Terms";
@@ -27,7 +29,9 @@ const App = () => (
             <Route path="/auth" element={<Auth />} />
             <Route path="/vagas" element={<Jobs />} />
             <Route path="/sobre" element={<About />} />
+            <Route path="/participar" element={<Participate />} />
             <Route path="/blog" element={<Blog />} />
+            <Route path="/blog/:slug" element={<BlogPost />} />
             <Route path="/perfil" element={<Profile />} />
             <Route path="/admin" element={<Admin />} />
             <Route path="/termos" element={<Terms />} />
