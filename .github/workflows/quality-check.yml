@@ -11,7 +11,7 @@ permissions:
 jobs:
   quality:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 20
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -30,3 +30,52 @@ jobs:
 
       - name: Production build
         run: npm run build
+
+      - name: Smoke test das rotas locais
+        shell: bash
+        run: |
+          npm run preview -- --host 127.0.0.1 > /tmp/incluatech-preview.log 2>&1 &
+          PREVIEW_PID=$!
+          trap 'kill $PREVIEW_PID' EXIT
+
+          for tentativa in {1..20}; do
+            if curl --silent --fail http://127.0.0.1:4173/ > /dev/null; then
+              break
+            fi
+            sleep 1
+          done
+
+          for rota in / /projeto /participar /vagas /blog /auth /privacidade /termos /pagina-inexistente; do
+            echo "Testando $rota"
+            curl --silent --fail "http://127.0.0.1:4173$rota" | grep --quiet '<div id="root"></div>'
+          done
+
+      - name: Smoke test público do Supabase
+        shell: bash
+        run: |
+          set -a
+          source .env
+          set +a
+
+          AUTH_STATUS=$(curl --silent --output /tmp/auth-settings.json --write-out '%{http_code}' \
+            "$VITE_SUPABASE_URL/auth/v1/settings" \
+            -H "apikey: $VITE_SUPABASE_PUBLISHABLE_KEY")
+          test "$AUTH_STATUS" = "200"
+
+          JOBS_STATUS=$(curl --silent --output /tmp/jobs.json --write-out '%{http_code}' \
+            "$VITE_SUPABASE_URL/rest/v1/jobs?select=id,title,is_active&limit=1" \
+            -H "apikey: $VITE_SUPABASE_PUBLISHABLE_KEY" \
+            -H "Authorization: Bearer $VITE_SUPABASE_PUBLISHABLE_KEY")
+          test "$JOBS_STATUS" = "200"
+
+          BLOG_STATUS=$(curl --silent --output /tmp/blog.json --write-out '%{http_code}' \
+            "$VITE_SUPABASE_URL/rest/v1/blog_posts?select=id,title,is_published&is_published=eq.true&limit=1" \
+            -H "apikey: $VITE_SUPABASE_PUBLISHABLE_KEY" \
+            -H "Authorization: Bearer $VITE_SUPABASE_PUBLISHABLE_KEY")
+          test "$BLOG_STATUS" = "200"
+
+          echo "Configuração de autenticação, vagas públicas e conteúdos públicos responderam corretamente."
+
+      - name: Auditoria de dependências de produção
+        continue-on-error: true
+        run: npm audit --omit=dev --audit-level=high
