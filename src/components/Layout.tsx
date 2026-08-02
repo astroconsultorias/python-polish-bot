@@ -7,10 +7,12 @@ import KnotMark from "@/components/KnotMark";
 import { BriefcaseBusiness, LogIn, LogOut, Menu, Shield, UserRound, X } from "lucide-react";
 
 const publicNavigation = [
+  { name: "Início", to: "/" },
   { name: "O projeto", to: "/sobre" },
-  { name: "Vagas", to: "/vagas" },
+  { name: "Como funciona", to: "/sobre#metodo" },
+  { name: "Oportunidades", to: "/vagas" },
   { name: "Conteúdos", to: "/blog" },
-  { name: "Participar", to: "/participar" },
+  { name: "Contato", to: "/participar" },
 ];
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
@@ -25,17 +27,21 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, [location.pathname]);
 
-  const linkClass = (path: string) =>
-    `rounded-lg px-3 py-2 text-sm font-bold transition-colors ${
-      location.pathname === path
+  const linkClass = (path: string) => {
+    const cleanPath = path.split("#")[0];
+    const isActive = cleanPath === "/" ? location.pathname === "/" : location.pathname === cleanPath;
+
+    return `rounded-lg px-3 py-2 text-sm font-bold transition-colors ${
+      isActive
         ? "bg-primary-light text-primary"
         : "text-muted-foreground hover:bg-muted hover:text-primary"
     }`;
+  };
 
   return (
     <div className="flex min-h-screen flex-col bg-background">
-      <header className="sticky top-0 z-50 w-full border-b border-border/70 bg-[hsl(var(--background)/0.95)] backdrop-blur-xl">
-        <nav className="mx-auto flex h-20 max-w-7xl items-center justify-between px-6 lg:px-10" aria-label="Navegação principal">
+      <header className="sticky top-0 z-50 w-full border-b border-border/60 bg-[hsl(var(--background)/0.96)] backdrop-blur-xl">
+        <nav className="mx-auto flex h-20 max-w-[1440px] items-center justify-between px-6 lg:px-10 xl:px-16" aria-label="Navegação principal">
           <Link to="/" className="group flex items-center gap-3" aria-label="Inclu@tech — página inicial">
             <span className="flex h-11 w-11 items-center justify-center rounded-2xl bg-primary text-white shadow-lg transition-transform duration-300 group-hover:-rotate-3 group-hover:scale-105">
               <KnotMark className="h-8 w-8" title="Símbolo Inclu@tech: pessoa no centro e ambiente preparado" />
@@ -44,13 +50,13 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
               <span className="block text-xl font-extrabold tracking-tight text-foreground">
                 Inclu<span className="text-primary">@tech</span>
               </span>
-              <span className="hidden text-[10px] font-bold uppercase tracking-[0.14em] text-muted-foreground xl:block">
+              <span className="hidden text-[10px] font-bold uppercase tracking-[0.14em] text-muted-foreground 2xl:block">
                 Tecnologia social para neuroinclusão
               </span>
             </span>
           </Link>
 
-          <div className="hidden items-center gap-1 lg:flex">
+          <div className="hidden items-center gap-0 xl:flex">
             {publicNavigation.map((item) => (
               <Link key={item.to} to={item.to} className={linkClass(item.to)}>
                 {item.name}
@@ -78,18 +84,18 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
               </>
             ) : (
               <>
-                <Button variant="ghost" size="sm" asChild className="font-bold">
+                <Button variant="ghost" size="sm" asChild className="hidden font-bold md:inline-flex">
                   <Link to="/auth"><LogIn className="mr-2 h-4 w-4" />Entrar</Link>
                 </Button>
-                <Button size="sm" asChild className="font-bold">
-                  <Link to="/participar">Fazer parte</Link>
+                <Button size="sm" asChild className="bg-accent px-5 font-bold text-white hover:bg-accent/90">
+                  <Link to="/participar">Quero colaborar</Link>
                 </Button>
               </>
             )}
 
             <button
               type="button"
-              className="inline-flex h-10 w-10 items-center justify-center rounded-lg text-foreground transition-colors hover:bg-muted lg:hidden"
+              className="inline-flex h-10 w-10 items-center justify-center rounded-lg text-foreground transition-colors hover:bg-muted xl:hidden"
               onClick={() => setMobileOpen((open) => !open)}
               aria-expanded={mobileOpen}
               aria-controls="mobile-navigation"
@@ -112,7 +118,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
         </nav>
 
         {mobileOpen && (
-          <div id="mobile-navigation" className="border-t bg-background px-6 py-5 shadow-lg lg:hidden">
+          <div id="mobile-navigation" className="border-t bg-background px-6 py-5 shadow-lg xl:hidden">
             <div className="mx-auto flex max-w-7xl flex-col gap-2">
               {publicNavigation.map((item) => (
                 <Link key={item.to} to={item.to} className={linkClass(item.to)}>
@@ -140,8 +146,8 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
                     <Button variant="outline" asChild className="border-2 font-bold">
                       <Link to="/auth">Entrar</Link>
                     </Button>
-                    <Button asChild className="font-bold">
-                      <Link to="/participar">Fazer parte</Link>
+                    <Button asChild className="bg-accent font-bold text-white hover:bg-accent/90">
+                      <Link to="/participar">Quero colaborar</Link>
                     </Button>
                   </div>
                 )}
@@ -154,7 +160,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
       <main className={fullWidth ? "flex-1" : "container mx-auto flex-1 px-6 py-10 md:py-14"}>{children}</main>
 
       <footer className="mt-auto border-t bg-[hsl(var(--foreground))] text-white">
-        <div className="mx-auto grid max-w-7xl gap-10 px-6 py-12 md:grid-cols-[1.4fr_0.8fr_0.8fr] lg:px-10">
+        <div className="mx-auto grid max-w-[1440px] gap-10 px-6 py-12 md:grid-cols-[1.35fr_1fr_0.75fr] lg:px-10 xl:px-16">
           <div>
             <div className="flex items-center gap-3">
               <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/10 text-white">
@@ -168,8 +174,8 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
           </div>
 
           <div>
-            <h2 className="text-sm font-extrabold uppercase tracking-wider text-white">Explore</h2>
-            <div className="mt-4 grid gap-3 text-sm text-white/65">
+            <h2 className="text-sm font-extrabold uppercase tracking-wider text-white">Navegue</h2>
+            <div className="mt-4 grid grid-cols-2 gap-3 text-sm text-white/65">
               {publicNavigation.map((item) => (
                 <Link key={item.to} to={item.to} className="transition-colors hover:text-white">{item.name}</Link>
               ))}
