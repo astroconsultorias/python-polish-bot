@@ -1,0 +1,174 @@
+/* Fase 1 — primeira dobra da Home Inclu@tech */
+
+.home-hero {
+  position: relative;
+  color: #ffffff;
+  background:
+    radial-gradient(circle at 78% 18%, rgba(231, 111, 97, 0.42), transparent 27%),
+    radial-gradient(circle at 63% 76%, rgba(177, 130, 220, 0.32), transparent 31%),
+    radial-gradient(circle at 8% 16%, rgba(115, 87, 178, 0.4), transparent 24%),
+    linear-gradient(128deg, #171126 0%, #2c2048 42%, #4b3268 72%, #6f3e64 100%) !important;
+  border-bottom-left-radius: 5rem;
+  border-bottom-right-radius: 5rem;
+  box-shadow: inset 0 -1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.home-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.2;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: linear-gradient(to bottom, black, transparent 88%);
+}
+
+.home-hero .dot-grid {
+  opacity: 0.13 !important;
+  filter: brightness(0) invert(1);
+}
+
+.home-hero .home-orb-one {
+  left: -4rem;
+  top: 8rem;
+  width: 19rem;
+  height: 19rem;
+  background: radial-gradient(circle, rgba(177, 130, 220, 0.28), rgba(177, 130, 220, 0));
+  filter: blur(8px);
+}
+
+.home-hero .home-orb-two {
+  right: 1%;
+  bottom: 2%;
+  width: 14rem;
+  height: 14rem;
+  background: radial-gradient(circle, rgba(255, 151, 137, 0.3), rgba(255, 151, 137, 0));
+  filter: blur(8px);
+}
+
+.home-hero h1 {
+  color: #ffffff !important;
+  text-wrap: balance;
+  text-shadow: 0 18px 45px rgba(8, 5, 18, 0.22);
+}
+
+.home-hero .text-gradient {
+  background: linear-gradient(90deg, #ffd7d0 0%, #ff9f91 43%, #d7b7ff 100%) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  color: transparent !important;
+}
+
+.home-hero .text-primary {
+  color: #ffd0c7 !important;
+}
+
+.home-hero .text-muted-foreground {
+  color: rgba(255, 255, 255, 0.75) !important;
+}
+
+.home-hero .relative.z-10.text-center > div:first-child {
+  color: #ffffff !important;
+  border-color: rgba(255, 255, 255, 0.2) !important;
+  background: rgba(255, 255, 255, 0.1) !important;
+  box-shadow: 0 12px 30px rgba(8, 5, 18, 0.16);
+}
+
+.home-hero a[href="/participar"] {
+  color: #ffffff !important;
+  border-color: transparent !important;
+  background: linear-gradient(135deg, #e76f61 0%, #f18c7d 100%) !important;
+  box-shadow: 0 18px 38px rgba(231, 111, 97, 0.32) !important;
+}
+
+.home-hero a[href="/participar"]:hover {
+  transform: translateY(-2px);
+  background: linear-gradient(135deg, #ef7769 0%, #f49c8f 100%) !important;
+}
+
+.home-hero a[href="/sobre"] {
+  color: #ffffff !important;
+  border-color: rgba(255, 255, 255, 0.32) !important;
+  background: rgba(255, 255, 255, 0.08) !important;
+  box-shadow: none !important;
+}
+
+.home-hero a[href="/sobre"]:hover {
+  background: rgba(255, 255, 255, 0.15) !important;
+}
+
+.home-hero a[href="/vagas"] {
+  color: #ffc0b5 !important;
+}
+
+.home-visual-stage {
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 3rem 9rem 3rem 3rem !important;
+  box-shadow:
+    0 42px 90px rgba(9, 5, 22, 0.42),
+    0 0 0 10px rgba(255, 255, 255, 0.035) !important;
+}
+
+.home-visual-stage > .absolute.inset-0 {
+  background:
+    radial-gradient(circle at 24% 18%, rgba(255, 255, 255, 0.22), transparent 28%),
+    radial-gradient(circle at 78% 78%, rgba(255, 177, 164, 0.45), transparent 34%),
+    linear-gradient(145deg, #6d4ab0 0%, #8d4f99 48%, #d86669 100%) !important;
+}
+
+.home-visual-stage [class*="border-white"] {
+  border-color: rgba(255, 255, 255, 0.2) !important;
+}
+
+.home-visual-stage [class*="bg-white/10"] {
+  background: rgba(255, 255, 255, 0.11) !important;
+}
+
+.home-floating-card {
+  border: 1px solid rgba(255, 255, 255, 0.55) !important;
+  background: rgba(255, 255, 255, 0.94) !important;
+  box-shadow: 0 24px 55px rgba(11, 6, 25, 0.28) !important;
+}
+
+.home-floating-card .text-muted-foreground {
+  color: #746d7e !important;
+}
+
+.home-floating-card .text-primary {
+  color: #4b3f72 !important;
+}
+
+.home-floating-card .text-accent {
+  color: #d55f53 !important;
+}
+
+@media (max-width: 1023px) {
+  .home-hero {
+    border-bottom-left-radius: 3rem;
+    border-bottom-right-radius: 3rem;
+  }
+}
+
+@media (max-width: 767px) {
+  .home-hero {
+    background:
+      radial-gradient(circle at 86% 13%, rgba(231, 111, 97, 0.34), transparent 25%),
+      radial-gradient(circle at 18% 60%, rgba(177, 130, 220, 0.28), transparent 29%),
+      linear-gradient(155deg, #171126 0%, #352451 58%, #633858 100%) !important;
+    border-bottom-left-radius: 2rem;
+    border-bottom-right-radius: 2rem;
+  }
+
+  .home-hero h1 {
+    font-size: clamp(2.75rem, 13vw, 4.25rem) !important;
+    line-height: 0.98 !important;
+    letter-spacing: -0.055em !important;
+  }
+
+  .home-visual-stage {
+    border-radius: 2.25rem 6rem 2.25rem 2.25rem !important;
+  }
+}

@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useAdmin } from "@/hooks/useAdmin";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Loader2, Users, Briefcase, FileText, UserCog } from "lucide-react";
+import { Loader2, Users, Briefcase, FileText, UserCog, FileCheck2, ShieldCheck } from "lucide-react";
 import { BlogManager } from "@/components/admin/BlogManager";
 import { UsersManager } from "@/components/admin/UsersManager";
 import { JobsManager } from "@/components/admin/JobsManager";
@@ -15,114 +15,55 @@ const Admin = () => {
   const { isAdmin, isLoading } = useAdmin();
 
   useEffect(() => {
-    if (!isLoading && !isAdmin) {
-      navigate("/");
-    }
+    if (!isLoading && !isAdmin) navigate("/");
   }, [isAdmin, isLoading, navigate]);
 
   if (isLoading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <Loader2 className="h-8 w-8 animate-spin text-primary" />
-      </div>
-    );
+    return <div className="flex min-h-[60vh] items-center justify-center"><Loader2 className="h-8 w-8 animate-spin text-primary" /></div>;
   }
 
-  if (!isAdmin) {
-    return null;
-  }
+  if (!isAdmin) return null;
 
   return (
-    <div className="container mx-auto py-8 px-4">
-      <div className="mb-8">
-        <h1 className="text-4xl font-bold mb-2">Painel Administrativo</h1>
-        <p className="text-muted-foreground">
-          Gerencie usuários, vagas, posts do blog e permissões
-        </p>
-      </div>
+    <div className="space-y-8">
+      <section className="relative overflow-hidden rounded-[2rem] bg-[hsl(var(--foreground))] p-8 text-white shadow-xl md:p-10">
+        <div className="dot-grid absolute inset-0 opacity-10" aria-hidden="true" />
+        <div className="relative z-10 flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
+          <div>
+            <div className="flex items-center gap-2 text-sm font-extrabold uppercase tracking-[0.16em] text-white/60"><ShieldCheck className="h-5 w-5 text-accent" />Governança da plataforma</div>
+            <h1 className="mt-4 text-4xl font-extrabold md:text-5xl">Administração Inclu@tech</h1>
+            <p className="mt-4 max-w-3xl leading-7 text-white/70">
+              Revise conteúdo, pessoas, organizações, vagas, candidaturas e permissões. Acesso administrativo exige cuidado com dados, rastreabilidade e finalidade legítima.
+            </p>
+          </div>
+        </div>
+      </section>
 
-      <Tabs defaultValue="blog" className="space-y-6">
-        <TabsList className="grid w-full grid-cols-5 lg:w-auto">
-          <TabsTrigger value="blog" className="gap-2">
-            <FileText className="h-4 w-4" />
-            <span className="hidden sm:inline">Blog</span>
-          </TabsTrigger>
-          <TabsTrigger value="users" className="gap-2">
-            <Users className="h-4 w-4" />
-            <span className="hidden sm:inline">Usuários</span>
-          </TabsTrigger>
-          <TabsTrigger value="jobs" className="gap-2">
-            <Briefcase className="h-4 w-4" />
-            <span className="hidden sm:inline">Vagas</span>
-          </TabsTrigger>
-          <TabsTrigger value="applications" className="gap-2">
-            <Briefcase className="h-4 w-4" />
-            <span className="hidden sm:inline">Candidaturas</span>
-          </TabsTrigger>
-          <TabsTrigger value="roles" className="gap-2">
-            <UserCog className="h-4 w-4" />
-            <span className="hidden sm:inline">Funções</span>
-          </TabsTrigger>
+      <Tabs defaultValue="jobs" className="space-y-6">
+        <TabsList className="flex h-auto w-full justify-start gap-1 overflow-x-auto rounded-2xl bg-muted p-1.5">
+          <TabsTrigger value="jobs" className="gap-2 whitespace-nowrap"><Briefcase className="h-4 w-4" />Vagas</TabsTrigger>
+          <TabsTrigger value="applications" className="gap-2 whitespace-nowrap"><FileCheck2 className="h-4 w-4" />Candidaturas</TabsTrigger>
+          <TabsTrigger value="blog" className="gap-2 whitespace-nowrap"><FileText className="h-4 w-4" />Conteúdos</TabsTrigger>
+          <TabsTrigger value="users" className="gap-2 whitespace-nowrap"><Users className="h-4 w-4" />Usuários</TabsTrigger>
+          <TabsTrigger value="roles" className="gap-2 whitespace-nowrap"><UserCog className="h-4 w-4" />Permissões</TabsTrigger>
         </TabsList>
 
+        <TabsContent value="jobs">
+          <Card><CardHeader><CardTitle>Vagas da plataforma</CardTitle><CardDescription>Ative, pause ou remova oportunidades. A criação e edição também estão disponíveis no painel da própria organização.</CardDescription></CardHeader><CardContent><JobsManager /></CardContent></Card>
+        </TabsContent>
+
+        <TabsContent value="applications"><ApplicationsManager /></TabsContent>
+
         <TabsContent value="blog">
-          <Card>
-            <CardHeader>
-              <CardTitle>Gerenciar Posts do Blog</CardTitle>
-              <CardDescription>
-                Crie, edite e publique posts no blog
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <BlogManager />
-            </CardContent>
-          </Card>
+          <Card><CardHeader><CardTitle>Conhecimento e comunicação</CardTitle><CardDescription>Crie, revise e publique conteúdos derivados da base oficial do projeto e de aprendizados documentados.</CardDescription></CardHeader><CardContent><BlogManager /></CardContent></Card>
         </TabsContent>
 
         <TabsContent value="users">
-          <Card>
-            <CardHeader>
-              <CardTitle>Gerenciar Usuários</CardTitle>
-              <CardDescription>
-                Visualize e gerencie todos os usuários da plataforma
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <UsersManager />
-            </CardContent>
-          </Card>
-        </TabsContent>
-
-        <TabsContent value="jobs">
-          <Card>
-            <CardHeader>
-              <CardTitle>Gerenciar Vagas</CardTitle>
-              <CardDescription>
-                Visualize e gerencie todas as vagas de emprego
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <JobsManager />
-            </CardContent>
-          </Card>
-        </TabsContent>
-
-        <TabsContent value="applications">
-          <ApplicationsManager />
+          <Card><CardHeader><CardTitle>Pessoas e organizações cadastradas</CardTitle><CardDescription>Visualize contas e tipos de participação. Evite acessar ou utilizar dados fora da finalidade da plataforma.</CardDescription></CardHeader><CardContent><UsersManager /></CardContent></Card>
         </TabsContent>
 
         <TabsContent value="roles">
-          <Card>
-            <CardHeader>
-              <CardTitle>Gerenciar Funções</CardTitle>
-              <CardDescription>
-                Atribua ou remova permissões de administrador
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <RolesManager />
-            </CardContent>
-          </Card>
+          <Card><CardHeader><CardTitle>Permissões administrativas</CardTitle><CardDescription>Conceda acesso administrativo somente a pessoas autorizadas e responsáveis pela governança da plataforma.</CardDescription></CardHeader><CardContent><RolesManager /></CardContent></Card>
         </TabsContent>
       </Tabs>
     </div>

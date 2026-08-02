@@ -1,154 +1,226 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Briefcase, Users, TrendingUp, Heart } from "lucide-react";
-import heroImage from "@/assets/hero-inclusao.jpg";
-import featureTalentos from "@/assets/feature-talentos.jpg";
-import featureEmpresas from "@/assets/feature-empresas.jpg";
-import featureCrescimento from "@/assets/feature-crescimento.jpg";
-import featureInclusao from "@/assets/feature-inclusao.jpg";
+import {
+  ArrowRight,
+  BookOpen,
+  BriefcaseBusiness,
+  Building2,
+  HeartPulse,
+  House,
+  ShieldCheck,
+  Sparkles,
+  UsersRound,
+} from "lucide-react";
+import heroPart1 from "@/assets/heroCollage/heroPart1";
+import heroPart2 from "@/assets/heroCollage/heroPart2";
+import heroPart3 from "@/assets/heroCollage/heroPart3";
+import heroPart4 from "@/assets/heroCollage/heroPart4";
 
-const Home = () => {
-  const features = [
-    {
-      icon: Users,
-      image: featureTalentos,
-      title: "Para Talentos",
-      description:
-        "Crie seu perfil e conecte-se com empresas que valorizam a diversidade e inclusão.",
-    },
-    {
-      icon: Briefcase,
-      image: featureEmpresas,
-      title: "Para Empresas",
-      description:
-        "Encontre talentos qualificados e construa equipes mais diversas e inovadoras.",
-    },
-    {
-      icon: TrendingUp,
-      image: featureCrescimento,
-      title: "Crescimento",
-      description:
-        "Acesse oportunidades de desenvolvimento profissional e networking.",
-    },
-    {
-      icon: Heart,
-      image: featureInclusao,
-      title: "Inclusão Real",
-      description:
-        "Promovemos um ambiente onde todos têm oportunidades iguais de crescer.",
-    },
-  ];
+const heroParts = [heroPart1, heroPart2, heroPart3, heroPart4];
 
-  return (
-    <div className="space-y-24">
-      {/* Hero Section */}
-      <section className="relative overflow-hidden rounded-3xl shadow-2xl">
-        <div className="absolute inset-0">
-          <img 
-            src={heroImage} 
-            alt="Equipe diversa e inclusiva trabalhando em ambiente tecnológico" 
-            className="h-full w-full object-cover"
+const impactAreas = [
+  {
+    icon: HeartPulse,
+    title: "Saúde",
+    description: "Ambientes de cuidado mais acolhedores, previsíveis e acessíveis para todos.",
+    iconClass: "bg-[#EEE9FF] text-[#5B46B2]",
+  },
+  {
+    icon: BriefcaseBusiness,
+    title: "Trabalho e renda",
+    description: "Oportunidades reais com suporte adequado para desenvolver potencial e autonomia.",
+    iconClass: "bg-[#FFE9E5] text-[#E76F61]",
+  },
+  {
+    icon: BookOpen,
+    title: "Conhecimento",
+    description: "Formação e informação que capacitam pessoas, famílias e profissionais.",
+    iconClass: "bg-[#E7F4FA] text-[#3987AD]",
+  },
+  {
+    icon: UsersRound,
+    title: "Comunidade",
+    description: "Conexão, apoio e pertencimento para transformar realidades juntos.",
+    iconClass: "bg-[#E6F5F0] text-[#248B72]",
+  },
+];
+
+const pillars = [
+  {
+    icon: Building2,
+    title: "Reduz barreiras invisíveis",
+    description: "Tornamos ambientes e processos mais compreensíveis, acessíveis e respeitosos com as diferenças.",
+    iconClass: "bg-[#EEE9FF] text-[#5B46B2]",
+  },
+  {
+    icon: Sparkles,
+    title: "Amplia autonomia",
+    description: "Apoiamos escolhas, habilidades e trajetórias com mais independência, clareza e segurança.",
+    iconClass: "bg-[#FFE9E5] text-[#E76F61]",
+  },
+  {
+    icon: House,
+    title: "Transforma ambientes",
+    description: "Capacitamos equipes e organizações para criar culturas verdadeiramente neuroinclusivas.",
+    iconClass: "bg-[#E6F5F0] text-[#248B72]",
+  },
+];
+
+const Home = () => (
+  <div className="overflow-hidden bg-[#FCFBFD] text-[#17151D]">
+    <section className="relative isolate border-b border-[#4B3F72]/5 bg-[radial-gradient(circle_at_12%_68%,rgba(231,111,97,0.10),transparent_28%),radial-gradient(circle_at_88%_18%,rgba(75,63,114,0.09),transparent_26%),linear-gradient(180deg,#ffffff_0%,#fbf9fd_100%)]">
+      <div
+        className="pointer-events-none absolute right-8 top-10 hidden h-36 w-36 opacity-30 lg:block"
+        aria-hidden="true"
+        style={{
+          backgroundImage: "radial-gradient(circle, #4B3F72 1.5px, transparent 1.5px)",
+          backgroundSize: "18px 18px",
+        }}
+      />
+
+      <div className="mx-auto grid max-w-[1440px] items-center gap-14 px-6 pb-16 pt-14 lg:min-h-[760px] lg:grid-cols-[0.84fr_1.16fr] lg:px-10 lg:pb-24 lg:pt-20 xl:px-16">
+        <div className="relative z-10 text-center lg:text-left">
+          <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-[#4B3F72]/10 bg-white/85 px-4 py-2 text-xs font-extrabold uppercase tracking-[0.14em] text-[#4B3F72] shadow-sm backdrop-blur">
+            <ShieldCheck className="h-4 w-4 text-[#E76F61]" />
+            Tecnologia social para neuroinclusão
+          </div>
+
+          <h1
+            className="mx-auto max-w-3xl text-[3.25rem] font-bold leading-[0.98] tracking-[-0.045em] text-[#28213D] sm:text-6xl lg:mx-0 xl:text-[4.65rem]"
+            style={{ fontFamily: 'Georgia, Cambria, "Times New Roman", serif' }}
+          >
+            Inclusão começa quando o ambiente se prepara
+          </h1>
+
+          <p className="mx-auto mt-7 max-w-2xl text-lg leading-8 text-[#5F5969] md:text-xl lg:mx-0">
+            A Inclu@tech transforma acolhimento, atendimento e oportunidades em experiências mais previsíveis, humanas e neuroinclusivas.
+          </p>
+
+          <div className="mt-9 flex flex-col justify-center gap-4 sm:flex-row lg:justify-start">
+            <Button size="xl" asChild className="min-w-[210px] bg-[#4B3F72] px-8 shadow-xl shadow-[#4B3F72]/20 hover:bg-[#3D3262]">
+              <Link to="/sobre">
+                Conhecer o projeto
+                <ArrowRight className="ml-2 h-5 w-5" />
+              </Link>
+            </Button>
+            <Button
+              size="xl"
+              variant="outline"
+              asChild
+              className="min-w-[210px] border-2 border-[#E76F61] bg-white/75 px-8 font-extrabold text-[#D85E51] hover:bg-[#FFF1EE] hover:text-[#C85145]"
+            >
+              <Link to="/vagas">
+                <BriefcaseBusiness className="mr-2 h-5 w-5" />
+                Ver oportunidades
+              </Link>
+            </Button>
+          </div>
+
+          <p className="mt-8 inline-flex items-center gap-2 text-sm font-bold text-[#4B3F72]">
+            <ShieldCheck className="h-5 w-5" />
+            A pessoa no centro. O ambiente preparado para acolher.
+          </p>
+        </div>
+
+        <div className="relative mx-auto w-full max-w-[760px]">
+          <div
+            className="pointer-events-none absolute -inset-10 -z-10 rounded-full bg-[#4B3F72]/10 blur-3xl"
+            aria-hidden="true"
           />
-          <div className="absolute inset-0 bg-gradient-hero opacity-95" />
-        </div>
-        <div className="relative z-10 px-8 py-20 md:px-16 md:py-32 lg:py-40">
-          <div className="max-w-4xl">
-            <h1 className="mb-8 text-4xl font-bold leading-tight text-white md:text-5xl lg:text-6xl">
-              Conectando Talentos Inclusivos a Oportunidades
-            </h1>
-            <p className="mb-10 text-lg text-white/95 md:text-xl lg:text-2xl max-w-2xl leading-relaxed">
-              A plataforma que une pessoas neurodivergentes e com deficiência às
-              empresas mais inclusivas do Rio Grande do Sul.
-            </p>
-            <div className="flex flex-wrap gap-4">
-              <Button size="xl" variant="secondary" asChild className="shadow-xl">
-                <Link to="/auth?signup=true">Cadastre-se Gratuitamente</Link>
-              </Button>
-              <Button size="xl" variant="outline" className="border-2 border-white bg-white/10 text-white hover:bg-white hover:text-primary backdrop-blur-sm shadow-xl" asChild>
-                <Link to="/vagas">Ver Vagas Disponíveis</Link>
-              </Button>
+          <figure className="overflow-hidden rounded-[2.25rem] border-[7px] border-white bg-white shadow-[0_30px_85px_rgba(40,33,61,0.20)]">
+            <div className="grid aspect-[86/53] grid-cols-4 overflow-hidden" role="img" aria-label="Criança em experiências de acolhimento e aprendizagem acompanhada">
+              {heroParts.map((part, index) => (
+                <img
+                  key={part}
+                  src={part}
+                  alt=""
+                  aria-hidden="true"
+                  className="h-full w-full object-cover"
+                  loading={index === 0 ? "eager" : "lazy"}
+                />
+              ))}
             </div>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section className="relative z-10 -mt-8 px-6 pb-16 lg:px-10 xl:px-16">
+      <div className="mx-auto grid max-w-[1320px] gap-4 sm:grid-cols-2 xl:grid-cols-4">
+        {impactAreas.map((area) => {
+          const Icon = area.icon;
+          return (
+            <article
+              key={area.title}
+              className="group rounded-[1.55rem] border border-[#4B3F72]/10 bg-white p-6 shadow-[0_12px_36px_rgba(40,33,61,0.08)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_18px_44px_rgba(40,33,61,0.13)]"
+            >
+              <div className={`flex h-14 w-14 items-center justify-center rounded-full ${area.iconClass}`}>
+                <Icon className="h-7 w-7" strokeWidth={2} />
+              </div>
+              <h2 className="mt-5 text-xl font-extrabold text-[#28213D]">{area.title}</h2>
+              <p className="mt-3 text-sm leading-6 text-[#686170]">{area.description}</p>
+            </article>
+          );
+        })}
+      </div>
+    </section>
+
+    <section className="bg-white px-6 py-20 lg:px-10 lg:py-24 xl:px-16">
+      <div className="mx-auto max-w-[1320px]">
+        <div className="grid gap-10 lg:grid-cols-[0.8fr_2.2fr] lg:items-start">
+          <div>
+            <span className="text-sm font-extrabold uppercase tracking-[0.16em] text-[#E76F61]">Impacto possível</span>
+            <h2
+              className="mt-4 text-4xl font-bold leading-[1.06] tracking-[-0.035em] text-[#28213D] md:text-5xl"
+              style={{ fontFamily: 'Georgia, Cambria, "Times New Roman", serif' }}
+            >
+              Por que a Inclu@tech importa?
+            </h2>
+            <div className="mt-5 h-1 w-20 rounded-full bg-[#E76F61]" />
+            <p className="mt-6 max-w-md text-base leading-7 text-[#686170]">
+              Pequenas mudanças na forma como acolhemos, comunicamos e organizamos ambientes podem gerar impactos profundos e duradouros.
+            </p>
           </div>
-        </div>
-      </section>
 
-      {/* Features */}
-      <section>
-        <div className="mb-16 text-center max-w-3xl mx-auto">
-          <h2 className="mb-6 text-3xl font-bold text-foreground md:text-4xl">
-            Por que escolher o Inclu@Tech?
-          </h2>
-          <p className="text-lg text-muted-foreground leading-relaxed">
-            Uma plataforma pensada para promover inclusão verdadeira no mercado de trabalho
-          </p>
-        </div>
-
-        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
-          {features.map((feature, index) => {
-            const Icon = feature.icon;
-            return (
-              <Card key={index} className="group overflow-hidden border-2 transition-all duration-300 hover:shadow-2xl hover:border-primary/50 hover:-translate-y-1">
-                <div className="relative h-56 overflow-hidden">
-                  <img 
-                    src={feature.image} 
-                    alt={`${feature.title} - representação visual`}
-                    className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-background via-background/50 to-transparent" />
-                  <div className="absolute bottom-4 left-4 flex h-14 w-14 items-center justify-center rounded-xl bg-primary shadow-xl group-hover:scale-110 transition-transform duration-300">
-                    <Icon className="h-7 w-7 text-primary-foreground" />
+          <div className="grid gap-8 md:grid-cols-3">
+            {pillars.map((pillar, index) => {
+              const Icon = pillar.icon;
+              return (
+                <article
+                  key={pillar.title}
+                  className={`relative ${index > 0 ? "md:border-l md:border-[#4B3F72]/10 md:pl-8" : ""}`}
+                >
+                  <div className={`flex h-16 w-16 items-center justify-center rounded-full ${pillar.iconClass}`}>
+                    <Icon className="h-8 w-8" strokeWidth={1.9} />
                   </div>
-                </div>
-                <CardHeader className="pb-3">
-                  <CardTitle className="text-xl">{feature.title}</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <CardDescription className="text-base leading-relaxed">
-                    {feature.description}
-                  </CardDescription>
-                </CardContent>
-              </Card>
-            );
-          })}
-        </div>
-      </section>
-
-      {/* Stats Section */}
-      <section className="rounded-3xl bg-gradient-card p-12 shadow-2xl md:p-16 border">
-        <div className="grid gap-12 text-center md:grid-cols-3">
-          <div className="space-y-3">
-            <div className="text-5xl md:text-6xl font-bold text-primary">500+</div>
-            <div className="text-base font-medium text-muted-foreground">Talentos Cadastrados</div>
-          </div>
-          <div className="space-y-3">
-            <div className="text-5xl md:text-6xl font-bold text-accent">100+</div>
-            <div className="text-base font-medium text-muted-foreground">Empresas Parceiras</div>
-          </div>
-          <div className="space-y-3">
-            <div className="text-5xl md:text-6xl font-bold text-success">1000+</div>
-            <div className="text-base font-medium text-muted-foreground">Conexões Realizadas</div>
+                  <h3 className="mt-6 text-xl font-extrabold leading-snug text-[#28213D]">{pillar.title}</h3>
+                  <p className="mt-3 text-sm leading-6 text-[#686170]">{pillar.description}</p>
+                </article>
+              );
+            })}
           </div>
         </div>
-      </section>
+      </div>
+    </section>
 
-      {/* CTA Section */}
-      <section className="rounded-3xl bg-gradient-hero p-12 text-center md:p-20 shadow-2xl relative overflow-hidden">
-        <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHBhdHRlcm4gaWQ9ImdyaWQiIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHBhdGggZD0iTSAxMCAwIEwgMCAwIDAgMTAiIGZpbGw9Im5vbmUiIHN0cm9rZT0id2hpdGUiIHN0cm9rZS13aWR0aD0iMC41IiBvcGFjaXR5PSIwLjEiLz48L3BhdHRlcm4+PC9kZWZzPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JpZCkiLz48L3N2Zz4=')] opacity-20"></div>
-        <div className="relative z-10">
-          <h2 className="mb-6 text-3xl md:text-4xl font-bold text-white">
-            Pronto para fazer a diferença?
-          </h2>
-          <p className="mb-10 text-lg md:text-xl text-white/95 max-w-2xl mx-auto leading-relaxed">
-            Junte-se a nós e faça parte de uma comunidade que valoriza a diversidade e promove oportunidades reais
+    <section className="px-6 pb-20 lg:px-10 lg:pb-24 xl:px-16">
+      <div className="mx-auto flex max-w-[1320px] flex-col items-center justify-between gap-8 overflow-hidden rounded-[2rem] bg-[#28213D] px-8 py-11 text-center text-white shadow-2xl md:flex-row md:px-12 md:text-left">
+        <div>
+          <span className="text-xs font-extrabold uppercase tracking-[0.16em] text-[#F6A79D]">Faça parte da mudança</span>
+          <h2 className="mt-3 text-3xl font-extrabold tracking-tight md:text-4xl">Ambientes melhores começam com uma primeira conversa.</h2>
+          <p className="mt-3 max-w-3xl text-sm leading-6 text-white/70 md:text-base">
+            Pessoas, famílias, profissionais e organizações podem contribuir para construir soluções mais humanas e neuroinclusivas.
           </p>
-          <Button size="xl" variant="secondary" asChild className="shadow-2xl">
-            <Link to="/auth?signup=true">Comece Agora - É Grátis</Link>
-          </Button>
         </div>
-      </section>
-    </div>
-  );
-};
+        <Button size="xl" asChild className="shrink-0 bg-[#E76F61] px-8 text-white shadow-xl shadow-black/20 hover:bg-[#D85E51]">
+          <Link to="/participar">
+            Quero colaborar
+            <ArrowRight className="ml-2 h-5 w-5" />
+          </Link>
+        </Button>
+      </div>
+    </section>
+  </div>
+);
 
 export default Home;
